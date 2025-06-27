@@ -9,7 +9,7 @@ jobs:
     runs-on: windows-2022
     env:
       PYTHON_VERSION: '3.12'
-      EXE_NAME: peakls.exe
+      EXE_NAME: peakls
       ENTRY_SCRIPT: main.py
 
     steps:
