@@ -7,9 +7,10 @@ from swapper import PEAKLaunchSwapper
 DEFAULT_STEAM_PATH = "C:\\Program Files (x86)\\Steam"
 
 
-def restart_steam():
+def restart_steam(info_path):
     os.system("taskkill /F /IM steam.exe")
-    os.startfile(os.path.join(DEFAULT_STEAM_PATH, "steam.exe"))
+    steam_path = os.path.dirname(os.path.dirname(info_path))
+    os.startfile(os.path.join(steam_path, "steam.exe"))
 
 
 if __name__ == "__main__":
@@ -51,4 +52,4 @@ if __name__ == "__main__":
         print("New launch options:")
         swapper.print_current_launch_options()
 
-    restart_steam()
+    restart_steam(args.path)
