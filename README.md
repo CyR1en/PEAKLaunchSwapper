@@ -16,7 +16,7 @@ Currently (6/26/2025), when you launch PEAK directly, Steam will automatically u
     ```
     ./peakls
     ```
-5. Steam will restart, and now you can use the Gale mod manager to launch PEAK, and it will now start with `DX12`
+5. Steam will restart, and now you can use the Thunderstore or Gale mod manager to launch PEAK, and it will now start with `DX12`
 
 Optional:
 - Revert to original:
