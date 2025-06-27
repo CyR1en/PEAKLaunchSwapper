@@ -33,7 +33,7 @@ jobs:
       - name: Build executable with PyInstaller
         run: |
           .\venv\Scripts\activate
-          pyinstaller --onefile --name $env:EXE_NAME $env:ENTRY_SCRIPT
+          pyinstaller --onefile --clean --name $env:EXE_NAME $env:ENTRY_SCRIPT
 
       - name: Export LATEST_TAG
         run: |
