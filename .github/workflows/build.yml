@@ -37,8 +37,13 @@ jobs:
 
       - name: Export LATEST_TAG
         run: |
-          echo "LATEST_TAG=$(curl -qsSL -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -H "X-GitHub-Api-Version: 2022-11-28" "${{ github.api_url }}/repos/${{ github.repository }}/releases/latest" | jq -r .tag_name)" >> $GITHUB_ENV
-      - name: Upload Release Artifact
+          echo "LATEST_TAG=$(curl -qsSL \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "${{ github.api_url }}/repos/${{ github.repository }}/releases/latest" \
+          | jq -r .tag_name)" >> $GITHUB_ENV
+      - name: Upload Release Executable
         env:
           GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run:
