@@ -2,6 +2,7 @@ import os
 import json
 from appinfo import Appinfo
 
+
 class PEAKLaunchSwapper:
     PEAK_APP_ID = 3527290
     APP_DIR = os.path.join(os.environ['LOCALAPPDATA'], 'PEAKLaunchSwapper')
@@ -14,7 +15,6 @@ class PEAKLaunchSwapper:
 
     def print_current_launch_options(self):
         launch_dict = self.appinfo.parsedAppInfo[self.PEAK_APP_ID]["sections"]["appinfo"]['config']['launch']
-        print("Current launch options:")
         print(json.dumps(launch_dict, indent=4))
         return launch_dict
 
@@ -24,10 +24,11 @@ class PEAKLaunchSwapper:
         obj5 = launch_dict["5"].copy()
         obj6 = launch_dict["6"].copy()
 
-        for key in obj5.keys():
-            if key != "type":
-                launch_dict["5"][key] = obj6.get(key)
-                launch_dict["6"][key] = obj5.get(key)
+        launch_dict["5"] = {}
+        launch_dict["6"] = {}
+
+        launch_dict["5"] = obj6
+        launch_dict["6"] = obj5
 
         launch_dict["5"]["type"] = "option1"
         launch_dict["6"]["type"] = "option2"
@@ -49,7 +50,7 @@ class PEAKLaunchSwapper:
         print("Changes saved to appinfo.vdf")
 
     def revert_original_launch_options(self):
-        if not os.path.isfile('launch_backup.json'):
+        if not os.path.isfile(self.BACKUP_PATH):
             print("No backup file found. Cannot revert.")
             return
 

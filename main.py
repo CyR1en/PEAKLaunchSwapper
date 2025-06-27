@@ -1,13 +1,16 @@
 import os
+import sys
 import argparse
 
 from swapper import PEAKLaunchSwapper
 
 DEFAULT_STEAM_PATH = "C:\\Program Files (x86)\\Steam"
 
+
 def restart_steam():
     os.system("taskkill /F /IM steam.exe")
     os.startfile(os.path.join(DEFAULT_STEAM_PATH, "steam.exe"))
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Swap or revert PEAK launch options in appinfo.vdf")
@@ -33,13 +36,19 @@ if __name__ == "__main__":
         swapper = PEAKLaunchSwapper(args.path)
     except FileNotFoundError:
         print(f"appinfo.vdf not found at {args.path}")
-        exit(1)
+        sys.exit(1)
 
+    print("Current launch options:")
     swapper.print_current_launch_options()
     if args.print_only:
-        exit(0)
+        sys.exit(0)
     if args.revert:
         swapper.revert_original_launch_options()
+        print("Reverted to original launch options:")
+        swapper.print_current_launch_options()
     else:
         swapper.swap_launch_options()
+        print("New launch options:")
+        swapper.print_current_launch_options()
+
     restart_steam()
