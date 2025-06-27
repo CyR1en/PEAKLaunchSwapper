@@ -4,7 +4,9 @@ _Only for windows_
 Currently (6/26/2025), when you launch PEAK directly, Steam will automatically use the first launch option for the game, meaning the game will always use Vulkan if launched directly (or with a mod manager). This causes an issue with mods that use `DX12` to draw on the screen, etc. This simple command-line app will swap the launch options so that when launched directly, it will not append the `-force-vulkan` parameter and use `DX12`.
 
 ### How do I use it?
-1. Download the latest executable [here](https://github.com/CyR1en/PEAKLaunchSwapper/releases/download/0.1.0/peakls.exe)
+1. Download the latest executable:
+
+    [https://github.com/CyR1en/PEAKLaunchSwapper/releases/download/0.1.0/peakls.exe](https://github.com/CyR1en/PEAKLaunchSwapper/releases/download/0.1.0/peakls.exe)
 2. Once downloaded, open `Windows Terminal`
 3. Change directory to `Downloads` (assuming that peakls.exe is in downloads folder)
     ```
