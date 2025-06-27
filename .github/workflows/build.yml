@@ -43,4 +43,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run:
-          gh release upload ${{ env.LATEST_TAG }} dist\${{ env.EXE_NAME }}
+          gh release upload ${{ env.LATEST_TAG }} dist\${{ env.EXE_NAME }}.exe
