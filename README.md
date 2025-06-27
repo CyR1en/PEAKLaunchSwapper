@@ -6,7 +6,7 @@ Currently (6/26/2025), when you launch PEAK directly, Steam will automatically u
 ### How do I use it?
 1. Download the latest executable [here](https://github.com/CyR1en/PEAKLaunchSwapper/releases/download/0.1.0/peakls.exe)
 2. Once downloaded, open `Windows Terminal`
-3. Change directory to `Downloads` if located in Downloads folder
+3. Change directory to `Downloads` (assuming that peakls.exe is in downloads folder)
     ```
     cd Downloads
     ```
