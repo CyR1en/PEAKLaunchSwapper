@@ -13,18 +13,28 @@ Currently (6/26/2025), when you launch PEAK directly, Steam will automatically u
     cd Downloads
     ```
 4. Swap the launch options using the following command:
-    ```
+    ```sh
     ./peakls
     ```
+    <details>
+
+    <summary>If Steam is not installed on the default path</summary>
+    
+    Specify a path for `appinfo.vdf`
+    ```sh
+    ./peakls -p "D:\Steam\appcache\appinfo.vdf"
+    ```
+    
+    </details>
 5. Steam will restart, and now you can use the Thunderstore or Gale mod manager to launch PEAK, and it will now start with `DX12`
 
 Optional:
 - Revert to original:
-    ```
+    ```sh
     ./peakls -r
     ```
 - Show current launch config:
-    ```
+    ```sh
     ./peakls --print-only
     ```
 
