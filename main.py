@@ -9,6 +9,7 @@ from swapper import PEAKLaunchSwapper
 DEFAULT_STEAM_PATH = "C:\\Program Files (x86)\\Steam"
 MD5_LOG_FILE = "MD5.txt"
 
+
 def generate_md5(file_path):
     try:
         with open(file_path, "rb") as f:
@@ -19,12 +20,14 @@ def generate_md5(file_path):
     except Exception as e:
         return f"Error generating MD5: {e}"
 
+
 def log_md5(label, md5_hash):
     try:
         with open(MD5_LOG_FILE, "a") as f:
             f.write(f"{label}: {md5_hash}\n")
     except Exception as e:
         print(f"Could not log MD5: {e}")
+
 
 def restart_steam(info_path):
     try:
@@ -44,6 +47,19 @@ def restart_steam(info_path):
     except Exception as e:
         print(f"Failed to restart Steam: {e}")
         sys.exit(1)
+
+
+def assert_path(provided_path):
+    if os.path.exists(provided_path):
+        return provided_path
+
+    while True:
+        str_in = input(f"appinfo.vdf not found at {provided_path}, input the correct path, or type X to exit: ")
+        if str_in.lower() == 'x':
+            print("Exiting...")
+            sys.exit(0)
+        if os.path.exists(str_in):
+            return str_in
 
 
 if __name__ == "__main__":
@@ -71,33 +87,19 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    path = args.path
+    path = assert_path(args.path)
 
-    # Clear MD5.txt at the start if logging is enabled
-    if args.md5 and os.path.exists(path):
+    if args.md5:
+        # Clear MD5.txt at the start if logging is enabled
         try:
             open(MD5_LOG_FILE, "w").close()
         except Exception as e:
             print(f"Failed to clear MD5 log file: {e}")
 
-    while True:
-        try:
-            if args.md5 and os.path.exists(path):
-                md5_before = generate_md5(path)
-                log_md5("Initial MD5", md5_before)
+        md5_before = generate_md5(path)
+        log_md5("Initial MD5", md5_before)
 
-            swapper = PEAKLaunchSwapper(path)
-            break
-        except FileNotFoundError:
-            path = input(f"appinfo.vdf not found at {args.path}, input the correct path, or type X to exit: ")
-            if path.lower() == 'x':
-                print("Exiting...")
-                sys.exit(0)
-            try:
-                path = os.path.join(path, "appcache", "appinfo.vdf")
-            except:
-                print("Invalid path format. Exiting.")
-                sys.exit(0)
+    swapper = PEAKLaunchSwapper(path)
 
     print("Current launch options:")
     swapper.print_current_launch_options()
