@@ -1,6 +1,10 @@
 ## PEAK Steam Launch Metadata Swapper
-_Only for Windows_
+### UPDATE
+This method is unreliable because `appinfo.vdf` gets updated frequently by Steam. For a more "permanent" solution, try https://github.com/CyR1en/UnityPlayerPatcher.
+
 ### When to use this
+_Only for Windows_
+
 Currently (6/26/2025), when you launch PEAK directly, Steam will automatically use the first launch option for the game, meaning the game will always use Vulkan if launched directly (or with a mod manager). This causes an issue with mods that use `DX12` to draw on the screen, etc. This simple command-line app will swap the launch options so that when launched directly, it will not append the `-force-vulkan` parameter and use `DX12`.
 
 ### How do I use it?
